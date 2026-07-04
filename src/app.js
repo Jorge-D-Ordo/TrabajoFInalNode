@@ -4,11 +4,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 /*import 'dotenv/config';                   ********************************* */
 
-import productsRouter from "./routes/products.routes.js";
-import authRouter from "./routes/auth.routes.js";
-import errorMiddleware from "./middlewares/error.middleware.js";
+//import productsRouter from "./routes/products.routes.js";
+//import authRouter from "./routes/auth.routes.js";
+//import errorMiddleware from "./middlewares/error.middleware.js";
 
-dotenv.config();
+//dotenv.config();
 
 const app = express();
 
@@ -21,7 +21,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
+/*app.get("/", (req, res) => {
   res.json({ mensaje: "API funcionando correctamente" });
 });
 
@@ -30,13 +30,15 @@ app.use((req, res, next) => {
     console.log(`Datos recibidos: ${req.method} ${req.url}`);
     next();
 });
-
-
+*/
+app.get("/", (req, res) => {
+  res.json({ ok: true });
+});
 
 /*      prueba luego borrar  ************************************************************************* */
 
 
-
+/*
 app.use("/api/products", productsRouter);
 app.use("/auth", authRouter);
 
@@ -49,5 +51,5 @@ app.use(function (req, res, next) {
 
 app.use(errorMiddleware);
 
-
+*/
 export default app;
