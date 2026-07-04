@@ -14,6 +14,6 @@ app.listen(PORT, () => {
   console.log(`Servidor en el puerto ${PORT}`);
 })
  borrar  ********************************************************************* */
-console.log("Programa iniciado");
+//console.log("Programa iniciado");
 export default app;
 ;
