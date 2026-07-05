@@ -11,11 +11,12 @@ const firebaseConfig = {
   appId: "1:718457598724:web:c29f1881ad292da8ac9651",
   measurementId: "G-58MNQ7R1R7"
 };
+/*****************************borrar  ************************************************************ */
+console.log("FIREBASE PROJECT ID:", process.env.FIREBASE_PROJECT_ID);
 
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 
-export { db };
+//export { db };
