@@ -6,7 +6,9 @@ import {
   doc,
   addDoc,
   deleteDoc,
-  updateDoc
+  updateDoc,
+  query,
+  where
 } from "firebase/firestore";
 
 const col = "products";
@@ -37,8 +39,26 @@ export const update = async (id, data) => {
   return { id, ...data};
 };
 
-export const remove = async (id) => {
+/*export const remove = async (id) => {
   const ref = doc(db, col, id);
   await deleteDoc(ref);
+  return { id };
+};*/
+export const remove = async (id) => {
+  const q = query(
+    collection(db, col),
+    where("id", "==", id)
+  );
+
+  const snap = await getDocs(q);
+
+  if (snap.empty) {
+    throw new Error("Producto no encontrado");
+  }
+
+  const firebaseId = snap.docs[0].id;
+
+  await deleteDoc(doc(db, col, firebaseId));f
+
   return { id };
 };

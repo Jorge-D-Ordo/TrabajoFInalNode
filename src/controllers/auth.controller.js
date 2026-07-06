@@ -32,7 +32,8 @@ export const login = (req, res) => {
     });
     return res.status(200).json({
       message: "Login exitoso",
-      token
+      token,
+      role
     });
   } catch (error) {
    // return res.status(500).json({
