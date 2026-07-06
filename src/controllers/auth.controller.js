@@ -35,6 +35,10 @@ export const login = (req, res) => {
       token
     });
   } catch (error) {
+   // return res.status(500).json({
+    //error: "Error interno del servidor"
+
+
     console.log("ERROR LOGIN:", error);
     return res.status(500).json({
       error: error.message
