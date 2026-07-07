@@ -48,7 +48,7 @@ export const create = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-    await deleteProduct(req.params.id);
+    const result = await deleteProduct(req.params.id);
     res.status(200).json({
       message: "Producto eliminado correctamente",
       id: result.id,
