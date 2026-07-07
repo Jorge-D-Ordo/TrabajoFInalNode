@@ -45,9 +45,14 @@ export const update = async (id, data) => {
   return { id };
 };*/
 export const remove = async (id) => {
+  
+   console.log("ID recibido:", id);
+  console.log("Colección:", col);
+  
   const q = query(
     collection(db, col),
     where("id", "==", id)
+    
   );
 
   const snap = await getDocs(q);
