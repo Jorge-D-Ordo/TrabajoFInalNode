@@ -20,12 +20,36 @@ export const getAll = async () => {
     ...d.data(),
   }));
 };
-
+/*
 export const getById = async (id) => {
   const ref = doc(db, col, id);
   const snap = await getDoc(ref);
   return snap.exists() ? { id: snap.id, ...snap.data() } : null;
 };
+*/
+export const getById = async (id) => {
+
+  const q = query(
+    collection(db, col),
+    where("id", "==", id)
+  );
+
+  const snap = await getDocs(q);
+
+  if (snap.empty) {
+    return null;
+  }
+
+  const documento = snap.docs[0];
+
+  return {
+    firebaseId: documento.id,
+    ...documento.data()
+  };
+};
+
+
+
 
 export const create = async (data) => {
   const ref = await addDoc(collection(db, col), data);
