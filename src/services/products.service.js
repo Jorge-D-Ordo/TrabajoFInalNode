@@ -51,22 +51,19 @@ export const createProduct = async (data) => {
 };
 
 export const deleteProduct = async (id) => {
-
-console.log("PASO POR SERVICE DELETE");
+  console.log("PASO POR SERVICE DELETE");
   console.log("ID SERVICE:", id);
 
-
-
   try {
-    const product = await model.remove(id);
+    return await model.remove(id);
 
-    if (!product) {
+    /* if (!product) {
       const error = new Error("Producto no encontrado");
       error.status = 404;
       throw error;
-    }
+    }*/
 
-    return await model.remove(id);
+    // return await model.remove(id);
   } catch (error) {
     throw error;
   }

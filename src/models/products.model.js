@@ -46,22 +46,44 @@ export const update = async (id, data) => {
 
 export const remove = async (id) => {
   /***************************************************************************** */
-  console.log("ID recibido:", id);
-  console.log("Colección:", col);
+  console.log("=========== DELETE ===========");
+  console.log("ID ID recibido desde la ruta::", id);
   console.log("Tipo del ID recibido:", typeof id);
 
+// Mostrar todos los IDs almacenados en Firestore
+  const todos = await getDocs(collection(db, col));
+  /*
   const q = query(collection(db, col), where("id", "==", id));
-
-  const snap = await getDocs(q);
-
+*/
+ 
   /*********************************************************************************** */
   console.log("Cantidad de resultados:", snap.size);
 
+console.log("Productos en Firestore:");
+
+  todos.forEach((documento) => {
+    console.log("----------------------");
+    console.log("Firebase ID:", documento.id);
+    console.log("Campo id:", documento.data().id);
+    console.log("Tipo campo id:", typeof documento.data().id);
+  });
+
+  /*
   snap.forEach((item) => {
     console.log("Firebase ID:", item.id);
     console.log("Datos:", item.data());
     console.log("Tipo del id guardado:", typeof item.data().id);
   });
+*/
+  // Buscar por el campo id
+  const q = query(
+    collection(db, col),
+    where("id", "==", id)
+  );
+
+const snap = await getDocs(q);
+
+  console.log("Cantidad encontrada:", snap.size);
 
   if (snap.empty) {
     throw new Error("Producto no encontrado");
@@ -69,7 +91,12 @@ export const remove = async (id) => {
 
   const firebaseId = snap.docs[0].id;
 
+console.log("Documento a eliminar:", firebaseId);
+
+
   await deleteDoc(doc(db, col, firebaseId));
+    console.log("Producto eliminado correctamente");
+
 
   return { id };
 };
