@@ -35,9 +35,9 @@ export const createProduct = async (data) => {
       !data.imagen1 ||
       !data.genero ||
       !data.notas ||
-      data.stock=== undefined  ||
-      data.eliminado=== undefined  ||
-      data.precio=== undefined 
+      data.stock === undefined ||
+      data.eliminado === undefined ||
+      data.precio === undefined
     ) {
       const error = new Error("Datos incompletos");
       error.status = 400;
@@ -51,19 +51,8 @@ export const createProduct = async (data) => {
 };
 
 export const deleteProduct = async (id) => {
-  console.log("PASO POR SERVICE DELETE");
-  console.log("ID SERVICE:", id);
-
   try {
     return await model.remove(id);
-
-    /* if (!product) {
-      const error = new Error("Producto no encontrado");
-      error.status = 404;
-      throw error;
-    }*/
-
-    // return await model.remove(id);
   } catch (error) {
     throw error;
   }

@@ -2,7 +2,7 @@ import {
   getAllProducts,
   getProductById,
   createProduct,
-  deleteProduct
+  deleteProduct,
 } from "../services/products.service.js";
 
 export const getAll = async (req, res) => {
@@ -11,7 +11,7 @@ export const getAll = async (req, res) => {
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({
-      error: "Error al obtener productos"
+      error: "Error al obtener productos",
     });
   }
 };
@@ -21,13 +21,13 @@ export const getById = async (req, res) => {
     const data = await getProductById(req.params.id);
     if (!data) {
       return res.status(404).json({
-        error: "Producto no encontrado"
+        error: "Producto no encontrado",
       });
     }
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({
-      error: "Error al obtener producto"
+      error: "Error al obtener producto",
     });
   }
 };
@@ -37,34 +37,25 @@ export const create = async (req, res) => {
     const result = await createProduct(req.body);
     res.status(201).json({
       message: "Producto creado",
-      id: result.id
+      id: result.id,
     });
   } catch (error) {
     res.status(400).json({
-      error: "Datos inválidos"
+      error: "Datos inválidos",
     });
   }
 };
 
 export const remove = async (req, res) => {
-
-  /**********************************************************************************   */
- console.log("PASO POR CONTROLLER DELETE");
-  console.log("ID CONTROLLER:", req.params.id);
-
   try {
     await deleteProduct(req.params.id);
     res.status(200).json({
-      message: "Producto eliminado"
+      message: "Producto eliminado correctamente",
+      id: result.id,
     });
   } catch (error) {
-     console.log("ERROR DELETE:", error);
-
-    //console.error("ERROR DELETE:", error);
-
     res.status(error.status || 500).json({
-      error: error.message
-    //  error: "Error al eliminar producto"
+      error: error.message,
     });
   }
 };
