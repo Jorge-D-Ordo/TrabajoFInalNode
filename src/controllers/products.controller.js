@@ -47,13 +47,20 @@ export const create = async (req, res) => {
 };
 
 export const remove = async (req, res) => {
+
+  /**********************************************************************************   */
+ console.log("PASO POR CONTROLLER DELETE");
+  console.log("ID CONTROLLER:", req.params.id);
+
   try {
     await deleteProduct(req.params.id);
     res.status(200).json({
       message: "Producto eliminado"
     });
   } catch (error) {
-    console.error("ERROR DELETE:", error);
+     console.log("ERROR DELETE:", error);
+
+    //console.error("ERROR DELETE:", error);
 
     res.status(error.status || 500).json({
       error: error.message
