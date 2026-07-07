@@ -27,7 +27,7 @@ export const getProductById = async (id) => {
 export const createProduct = async (data) => {
   try {
     if (
-      !data.is ||
+      !data.id ||
       !data.CodProducto ||
       !data.nombre ||
       !data.descripcion ||
