@@ -32,7 +32,7 @@ export const getById = async (id) => {
     return null;
   }
 
-  const documento = snap.docs[0];
+  // const documento = snap.docs[0];
 
   return {
     ...documento.data(),
@@ -53,17 +53,17 @@ export const update = async (id, data) => {
 
 export const remove = async (id) => {
   const q = query(collection(db, col), where("id", "==", id));
+
+  const snap = await getDocs(q);
+
+  if (snap.empty) {
+    throw new Error("Producto no encontrado");
+  }
+
+  const firebaseId = snap.docs[0].id;
+
+  await deleteDoc(doc(db, col, firebaseId));
+  console.log("Producto eliminado correctamente");
+
+  return { id };
 };
-
-const snap = await getDocs(q);
-
-if (snap.empty) {
-  throw new Error("Producto no encontrado");
-}
-
-const firebaseId = snap.docs[0].id;
-
-await deleteDoc(doc(db, col, firebaseId));
-console.log("Producto eliminado correctamente");
-
-return { id };
