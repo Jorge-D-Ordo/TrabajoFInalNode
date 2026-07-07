@@ -35,9 +35,9 @@ export const createProduct = async (data) => {
       !data.imagen1 ||
       !data.genero ||
       !data.notas ||
-      !data.stock ||
-      !data.eliminado ||
-      !data.precio
+      data.stock=== undefined  ||
+      data.eliminado=== undefined  ||
+      data.precio=== undefined 
     ) {
       const error = new Error("Datos incompletos");
       error.status = 400;
