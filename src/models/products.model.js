@@ -41,13 +41,6 @@ export const create = async (data) => {
   await addDoc(collection(db, col), data);
   return data;
 };
-/*
-export const update = async (id, data) => {
-  const ref = doc(db, col, id);
-  await updateDoc(ref, data);
-  return { id, ...data };
-};
-*/
 
 export const remove = async (id) => {
   const q = query(collection(db, col), where("id", "==", id));
