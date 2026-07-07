@@ -53,8 +53,11 @@ export const remove = async (req, res) => {
       message: "Producto eliminado"
     });
   } catch (error) {
-    res.status(500).json({
-      error: "Error al eliminar producto"
+    console.error("ERROR DELETE:", error);
+
+    res.status(error.status || 500).json({
+      error: error.message
+    //  error: "Error al eliminar producto"
     });
   }
 };
