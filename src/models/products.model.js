@@ -57,7 +57,6 @@ export const remove = async (id) => {
 */
  
   /*********************************************************************************** */
-  console.log("Cantidad de resultados:", snap.size);
 
 console.log("Productos en Firestore:");
 
