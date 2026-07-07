@@ -14,17 +14,17 @@ import {
 const col = "products";
 
 export const getAll = async () => {
-  const snap = await getDocs(collection(db, col),orderBy("id"));
+  const q = query(collection(db, col), orderBy("id"));
+
+  const snap = await getDocs(q);
+
   return snap.docs.map((d) => ({
     ...d.data(),
   }));
 };
 
 export const getById = async (id) => {
-  const q = query(
-    collection(db, col),
-    where("id", "==", id)
-  );
+  const q = query(collection(db, col), where("id", "==", id));
 
   const snap = await getDocs(q);
 
@@ -35,7 +35,7 @@ export const getById = async (id) => {
   const documento = snap.docs[0];
 
   return {
-    ...documento.data()
+    ...documento.data(),
   };
 };
 
@@ -52,23 +52,18 @@ export const update = async (id, data) => {
 */
 
 export const remove = async (id) => {
-  const q = query(
-    collection(db, col),
-    where("id", "==", id)
-  );
+  const q = query(collection(db, col), where("id", "==", id));
 };
 
 const snap = await getDocs(q);
 
-  if (snap.empty) {
-    throw new Error("Producto no encontrado");
-  }
+if (snap.empty) {
+  throw new Error("Producto no encontrado");
+}
 
-  const firebaseId = snap.docs[0].id;
+const firebaseId = snap.docs[0].id;
 
-  await deleteDoc(doc(db, col, firebaseId));
-    console.log("Producto eliminado correctamente");
+await deleteDoc(doc(db, col, firebaseId));
+console.log("Producto eliminado correctamente");
 
-  return { id };
-};
-sd 
+return { id };
