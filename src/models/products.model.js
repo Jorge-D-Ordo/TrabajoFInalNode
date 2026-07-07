@@ -32,10 +32,8 @@ export const getById = async (id) => {
     return null;
   }
 
-  // const documento = snap.docs[0];
-
   return {
-    ...documento.data(),
+    ...snap.docs[0].data(),
   };
 };
 
